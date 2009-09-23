@@ -1,0 +1,10 @@
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\ID3v1Lib\bin\Release\ID3v1Lib.dll
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\ID3v1Lib\bin\Release\ID3v1Lib.pdb
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\ID3v1Lib\obj\Release\ResolveAssemblyReference.cache
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\ID3v1Lib\obj\Release\ID3v1Lib.dll
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\ID3v1Lib\obj\Release\ID3v1Lib.pdb
+D:\My Documents\My Documents\SharpDevelop Projects\KIDPlayer\ID3v1Lib\bin\Release\ID3v1Lib.dll
+D:\My Documents\My Documents\SharpDevelop Projects\KIDPlayer\ID3v1Lib\bin\Release\ID3v1Lib.pdb
+D:\My Documents\My Documents\SharpDevelop Projects\KIDPlayer\ID3v1Lib\obj\Release\ResolveAssemblyReference.cache
+D:\My Documents\My Documents\SharpDevelop Projects\KIDPlayer\ID3v1Lib\obj\Release\ID3v1Lib.dll
+D:\My Documents\My Documents\SharpDevelop Projects\KIDPlayer\ID3v1Lib\obj\Release\ID3v1Lib.pdb

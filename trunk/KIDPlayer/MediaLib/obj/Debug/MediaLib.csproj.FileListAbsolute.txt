@@ -1,0 +1,16 @@
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\MediaLib\obj\Debug\ResolveAssemblyReference.cache
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\MediaLib\obj\Debug\Interop.WMPLib.dll
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\MediaLib\obj\Debug\MediaLib.csproj.ResolveComReference.cache
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\MediaLib\bin\Debug\MediaLib.dll
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\MediaLib\bin\Debug\MediaLib.pdb
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\MediaLib\bin\Debug\Interop.WMPLib.dll
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\MediaLib\obj\Debug\MediaLib.dll
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\MediaLib\obj\Debug\MediaLib.pdb
+D:\My Documents\My Documents\SharpDevelop Projects\KIDPlayer\MediaLib\bin\Debug\MediaLib.dll
+D:\My Documents\My Documents\SharpDevelop Projects\KIDPlayer\MediaLib\bin\Debug\MediaLib.pdb
+D:\My Documents\My Documents\SharpDevelop Projects\KIDPlayer\MediaLib\bin\Debug\Interop.WMPLib.dll
+D:\My Documents\My Documents\SharpDevelop Projects\KIDPlayer\MediaLib\obj\Debug\ResolveAssemblyReference.cache
+D:\My Documents\My Documents\SharpDevelop Projects\KIDPlayer\MediaLib\obj\Debug\Interop.WMPLib.dll
+D:\My Documents\My Documents\SharpDevelop Projects\KIDPlayer\MediaLib\obj\Debug\MediaLib.csproj.ResolveComReference.cache
+D:\My Documents\My Documents\SharpDevelop Projects\KIDPlayer\MediaLib\obj\Debug\MediaLib.dll
+D:\My Documents\My Documents\SharpDevelop Projects\KIDPlayer\MediaLib\obj\Debug\MediaLib.pdb

@@ -1,0 +1,57 @@
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\bin\Debug\KIDPlayer.exe
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\bin\Debug\KIDPlayer.pdb
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\bin\Debug\TTLRC.dll
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\bin\Debug\TTLRC.pdb
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\bin\Debug\Interop.WMPLib.dll
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\bin\Debug\AxInterop.WMPLib.dll
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\obj\Debug\ResolveAssemblyReference.cache
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\obj\Debug\Interop.WMPLib.dll
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\obj\Debug\AxInterop.WMPLib.dll
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\obj\Debug\KIDPlayer.csproj.ResolveComReference.cache
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\obj\Debug\KIDPlayer.FormLRC.resources
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\obj\Debug\KIDPlayer.FormSelect.resources
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\obj\Debug\KIDPlayer.MainForm.resources
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\obj\Debug\KIDPlayer.Properties.Resources.resources
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\obj\Debug\KIDPlayer.csproj.GenerateResource.Cache
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\obj\Debug\KIDPlayer.exe
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\obj\Debug\KIDPlayer.pdb
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\bin\Debug\ID3v1Lib.dll
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\bin\Debug\ID3v1Lib.pdb
+D:\My Documents\My Documents\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\bin\Debug\KIDPlayer.exe
+D:\My Documents\My Documents\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\bin\Debug\KIDPlayer.pdb
+D:\My Documents\My Documents\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\bin\Debug\ID3v1Lib.dll
+D:\My Documents\My Documents\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\bin\Debug\TTLRC.dll
+D:\My Documents\My Documents\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\bin\Debug\ID3v1Lib.pdb
+D:\My Documents\My Documents\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\bin\Debug\TTLRC.pdb
+D:\My Documents\My Documents\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\bin\Debug\Interop.WMPLib.dll
+D:\My Documents\My Documents\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\bin\Debug\AxInterop.WMPLib.dll
+D:\My Documents\My Documents\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\obj\Debug\ResolveAssemblyReference.cache
+D:\My Documents\My Documents\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\obj\Debug\Interop.WMPLib.dll
+D:\My Documents\My Documents\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\obj\Debug\AxInterop.WMPLib.dll
+D:\My Documents\My Documents\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\obj\Debug\KIDPlayer.csproj.ResolveComReference.cache
+D:\My Documents\My Documents\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\obj\Debug\KIDPlayer.FormLRC.resources
+D:\My Documents\My Documents\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\obj\Debug\KIDPlayer.FormSelect.resources
+D:\My Documents\My Documents\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\obj\Debug\KIDPlayer.MainForm.resources
+D:\My Documents\My Documents\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\obj\Debug\KIDPlayer.Properties.Resources.resources
+D:\My Documents\My Documents\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\obj\Debug\KIDPlayer.csproj.GenerateResource.Cache
+D:\My Documents\My Documents\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\obj\Debug\KIDPlayer.exe
+D:\My Documents\My Documents\Visual Studio 2008\Projects\KIDPlayer\KIDPlayer\obj\Debug\KIDPlayer.pdb
+D:\My Documents\My Documents\SharpDevelop Projects\KIDPlayer\KIDPlayer\obj\Debug\ResolveAssemblyReference.cache
+D:\My Documents\My Documents\SharpDevelop Projects\KIDPlayer\KIDPlayer\obj\Debug\Interop.WMPLib.dll
+D:\My Documents\My Documents\SharpDevelop Projects\KIDPlayer\KIDPlayer\obj\Debug\AxInterop.WMPLib.dll
+D:\My Documents\My Documents\SharpDevelop Projects\KIDPlayer\KIDPlayer\obj\Debug\KIDPlayer.csproj.ResolveComReference.cache
+D:\My Documents\My Documents\SharpDevelop Projects\KIDPlayer\KIDPlayer\obj\Debug\KIDPlayer.FormLRC.resources
+D:\My Documents\My Documents\SharpDevelop Projects\KIDPlayer\KIDPlayer\obj\Debug\KIDPlayer.FormSelect.resources
+D:\My Documents\My Documents\SharpDevelop Projects\KIDPlayer\KIDPlayer\obj\Debug\KIDPlayer.MainForm.resources
+D:\My Documents\My Documents\SharpDevelop Projects\KIDPlayer\KIDPlayer\obj\Debug\KIDPlayer.Properties.Resources.resources
+D:\My Documents\My Documents\SharpDevelop Projects\KIDPlayer\KIDPlayer\obj\Debug\KIDPlayer.csproj.GenerateResource.Cache
+D:\My Documents\My Documents\SharpDevelop Projects\KIDPlayer\KIDPlayer\obj\Debug\KIDPlayer.exe
+D:\My Documents\My Documents\SharpDevelop Projects\KIDPlayer\KIDPlayer\bin\Debug\KIDPlayer.exe
+D:\My Documents\My Documents\SharpDevelop Projects\KIDPlayer\KIDPlayer\bin\Debug\KIDPlayer.pdb
+D:\My Documents\My Documents\SharpDevelop Projects\KIDPlayer\KIDPlayer\bin\Debug\ID3v1Lib.dll
+D:\My Documents\My Documents\SharpDevelop Projects\KIDPlayer\KIDPlayer\bin\Debug\TTLRC.dll
+D:\My Documents\My Documents\SharpDevelop Projects\KIDPlayer\KIDPlayer\bin\Debug\ID3v1Lib.pdb
+D:\My Documents\My Documents\SharpDevelop Projects\KIDPlayer\KIDPlayer\bin\Debug\TTLRC.pdb
+D:\My Documents\My Documents\SharpDevelop Projects\KIDPlayer\KIDPlayer\bin\Debug\Interop.WMPLib.dll
+D:\My Documents\My Documents\SharpDevelop Projects\KIDPlayer\KIDPlayer\bin\Debug\AxInterop.WMPLib.dll
+D:\My Documents\My Documents\SharpDevelop Projects\KIDPlayer\KIDPlayer\obj\Debug\KIDPlayer.pdb

@@ -1,0 +1,5 @@
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\other\obj\Debug\ResolveAssemblyReference.cache
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\other\bin\Debug\other.dll
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\other\bin\Debug\other.pdb
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\other\obj\Debug\other.dll
+D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\other\obj\Debug\other.pdb
