@@ -1,5 +1,0 @@
-D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\MciLib\obj\Debug\ResolveAssemblyReference.cache
-D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\MciLib\bin\Debug\MciLib.dll
-D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\MciLib\bin\Debug\MciLib.pdb
-D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\MciLib\obj\Debug\MciLib.dll
-D:\Documents\文档\Visual Studio 2008\Projects\KIDPlayer\MciLib\obj\Debug\MciLib.pdb
