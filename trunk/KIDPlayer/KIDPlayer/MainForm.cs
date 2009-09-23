@@ -313,13 +313,13 @@ namespace KIDPlayer
 		{
 			if(this.WindowState == FormWindowState.Minimized) 
   			{ 
-   				this.Visible = false; 
+   				this.Visible = false;
   			} 
 		}
 		
 		void NotifyIcon1Click(object sender, EventArgs e)
 		{
-			this.Visible = true; 
+			this.Visible = true;
   			this.WindowState = FormWindowState.Normal; 
 		}
 		
