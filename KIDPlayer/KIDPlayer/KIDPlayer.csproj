@@ -72,6 +72,7 @@
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="main_Icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ID3v1Lib\ID3v1Lib.csproj">
