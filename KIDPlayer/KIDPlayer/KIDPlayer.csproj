@@ -9,7 +9,8 @@
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <SourceAnalysisOverrideSettingsFile>C:\Users\Administrator\AppData\Roaming\ICSharpCode/SharpDevelop3.0\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
-    <ApplicationIcon>main_Icon.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
     <SccProjectName>Svn</SccProjectName>
     <SccLocalPath>Svn</SccLocalPath>
     <SccAuxPath>Svn</SccAuxPath>
@@ -52,12 +53,18 @@
     <Compile Include="FormSelect.Designer.cs">
       <DependentUpon>FormSelect.cs</DependentUpon>
     </Compile>
+    <Compile Include="Images.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Images.resx</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MeteringStream.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TreeView.cs">
@@ -65,31 +72,34 @@
     </Compile>
     <EmbeddedResource Include="FormLRC.resx">
       <DependentUpon>FormLRC.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSelect.resx">
       <DependentUpon>FormSelect.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Images.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <None Include="main_Icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ID3v1Lib\ID3v1Lib.csproj">
       <Project>{7FC4473C-D73A-47C6-BDD0-E794155DC512}</Project>
       <Name>ID3v1Lib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NAudio\NAudio.csproj">
+      <Project>{DA4F02E3-0B5E-42CD-B8D9-5583FA51D66E}</Project>
+      <Name>NAudio</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TTLRC\TTLRC.csproj">
       <Project>{1C833D37-8797-43AA-9666-821FFBA7B8D9}</Project>
       <Name>TTLRC</Name>
     </ProjectReference>
-    <COMReference Include="WMPLib">
-      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
   </ItemGroup>
 </Project>

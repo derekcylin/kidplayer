@@ -45,12 +45,11 @@ namespace KIDPlayer
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lRCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.trackBar2 = new System.Windows.Forms.TrackBar();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.buttonStop = new System.Windows.Forms.Button();
+            this.buttonPause = new System.Windows.Forms.Button();
+            this.buttonPlay = new System.Windows.Forms.Button();
+            this.labelTotalTime = new System.Windows.Forms.Label();
+            this.labelCurrentTime = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.listBox1 = new System.Windows.Forms.ListBox();
@@ -65,30 +64,26 @@ namespace KIDPlayer
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.addToPlaylistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearCheckedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.trackBarPosition = new System.Windows.Forms.TrackBar();
+            this.volumeSlider1 = new NAudio.Gui.VolumeSlider();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip2.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarPosition)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.viewToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(624, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(624, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -133,79 +128,68 @@ namespace KIDPlayer
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.trackBar2);
-            this.panel1.Controls.Add(this.button3);
-            this.panel1.Controls.Add(this.button2);
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.buttonStop);
+            this.panel1.Controls.Add(this.buttonPause);
+            this.panel1.Controls.Add(this.buttonPlay);
+            this.panel1.Controls.Add(this.labelTotalTime);
+            this.panel1.Controls.Add(this.labelCurrentTime);
             this.panel1.Controls.Add(this.tabControl1);
             this.panel1.Controls.Add(this.treeView1);
-            this.panel1.Controls.Add(this.trackBar1);
+            this.panel1.Controls.Add(this.trackBarPosition);
+            this.panel1.Controls.Add(this.volumeSlider1);
             this.panel1.Location = new System.Drawing.Point(0, 28);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(624, 415);
             this.panel1.TabIndex = 1;
             // 
-            // trackBar2
+            // buttonStop
             // 
-            this.trackBar2.Location = new System.Drawing.Point(538, 371);
-            this.trackBar2.Maximum = 100;
-            this.trackBar2.Name = "trackBar2";
-            this.trackBar2.Size = new System.Drawing.Size(74, 45);
-            this.trackBar2.TabIndex = 5;
-            this.trackBar2.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.trackBar2.Value = 80;
-            this.trackBar2.ValueChanged += new System.EventHandler(this.TrackBar2ValueChanged);
+            this.buttonStop.Image = global::KIDPlayer.Images.Stop;
+            this.buttonStop.Location = new System.Drawing.Point(275, 382);
+            this.buttonStop.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonStop.Name = "buttonStop";
+            this.buttonStop.Size = new System.Drawing.Size(25, 20);
+            this.buttonStop.TabIndex = 2;
+            this.buttonStop.UseVisualStyleBackColor = true;
+            this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click);
             // 
-            // button3
+            // buttonPause
             // 
-            this.button3.Location = new System.Drawing.Point(295, 379);
-            this.button3.Margin = new System.Windows.Forms.Padding(0);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(43, 23);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Stop";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.Button3Click);
+            this.buttonPause.Image = global::KIDPlayer.Images.Pause;
+            this.buttonPause.Location = new System.Drawing.Point(250, 382);
+            this.buttonPause.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonPause.Name = "buttonPause";
+            this.buttonPause.Size = new System.Drawing.Size(25, 20);
+            this.buttonPause.TabIndex = 2;
+            this.buttonPause.UseVisualStyleBackColor = true;
+            this.buttonPause.Click += new System.EventHandler(this.buttonPause_Click);
             // 
-            // button2
+            // buttonPlay
             // 
-            this.button2.Location = new System.Drawing.Point(252, 379);
-            this.button2.Margin = new System.Windows.Forms.Padding(0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(43, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Pause";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.Button2Click);
+            this.buttonPlay.Image = global::KIDPlayer.Images.Play;
+            this.buttonPlay.Location = new System.Drawing.Point(225, 382);
+            this.buttonPlay.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonPlay.Name = "buttonPlay";
+            this.buttonPlay.Size = new System.Drawing.Size(25, 20);
+            this.buttonPlay.TabIndex = 2;
+            this.buttonPlay.UseVisualStyleBackColor = true;
+            this.buttonPlay.Click += new System.EventHandler(this.buttonPlay_Click);
             // 
-            // button1
+            // labelTotalTime
             // 
-            this.button1.Location = new System.Drawing.Point(209, 379);
-            this.button1.Margin = new System.Windows.Forms.Padding(0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(43, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Play";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1Click);
+            this.labelTotalTime.Location = new System.Drawing.Point(565, 345);
+            this.labelTotalTime.Name = "labelTotalTime";
+            this.labelTotalTime.Size = new System.Drawing.Size(40, 23);
+            this.labelTotalTime.TabIndex = 4;
+            this.labelTotalTime.Text = "00:00";
             // 
-            // label2
+            // labelCurrentTime
             // 
-            this.label2.Location = new System.Drawing.Point(565, 345);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(40, 23);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "00:00";
-            // 
-            // label1
-            // 
-            this.label1.Location = new System.Drawing.Point(519, 345);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(40, 23);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "00:00";
+            this.labelCurrentTime.Location = new System.Drawing.Point(519, 345);
+            this.labelCurrentTime.Name = "labelCurrentTime";
+            this.labelCurrentTime.Size = new System.Drawing.Size(40, 23);
+            this.labelCurrentTime.TabIndex = 4;
+            this.labelCurrentTime.Text = "00:00";
             // 
             // tabControl1
             // 
@@ -332,17 +316,25 @@ namespace KIDPlayer
             this.clearCheckedToolStripMenuItem.Text = "Clear Checked";
             this.clearCheckedToolStripMenuItem.Click += new System.EventHandler(this.ClearCheckedToolStripMenuItemClick);
             // 
-            // trackBar1
+            // trackBarPosition
             // 
-            this.trackBar1.Location = new System.Drawing.Point(222, 345);
-            this.trackBar1.Maximum = 500;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(291, 45);
-            this.trackBar1.TabIndex = 3;
-            this.trackBar1.TickFrequency = 0;
-            this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.trackBar1.MouseCaptureChanged += new System.EventHandler(this.TrackBar1MouseCaptureChanged);
-            this.trackBar1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TrackBar1MouseDown);
+            this.trackBarPosition.Location = new System.Drawing.Point(222, 345);
+            this.trackBarPosition.Maximum = 500;
+            this.trackBarPosition.Name = "trackBarPosition";
+            this.trackBarPosition.Size = new System.Drawing.Size(281, 45);
+            this.trackBarPosition.TabIndex = 3;
+            this.trackBarPosition.TickFrequency = 0;
+            this.trackBarPosition.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.trackBarPosition.Scroll += new System.EventHandler(this.trackBarPosition_Scroll);
+            // 
+            // volumeSlider1
+            // 
+            this.volumeSlider1.Location = new System.Drawing.Point(509, 382);
+            this.volumeSlider1.Name = "volumeSlider1";
+            this.volumeSlider1.Size = new System.Drawing.Size(96, 16);
+            this.volumeSlider1.TabIndex = 0;
+            this.volumeSlider1.Volume = 1F;
+            this.volumeSlider1.VolumeChanged += new System.EventHandler(this.volumeSlider1_VolumeChanged);
             // 
             // openFileDialog1
             // 
@@ -353,7 +345,7 @@ namespace KIDPlayer
             // timer1
             // 
             this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.Timer1Tick);
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // notifyIcon1
             // 
@@ -382,27 +374,23 @@ namespace KIDPlayer
             this.Load += new System.EventHandler(this.MainFormLoad);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainFormFormClosing);
             this.Resize += new System.EventHandler(this.MainFormResize);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.contextMenuStrip2.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarPosition)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
 		}
 		private System.Windows.Forms.Timer timer2;
-		private System.Windows.Forms.NotifyIcon notifyIcon1;
-		private System.Windows.Forms.TrackBar trackBar2;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
 		private System.Windows.Forms.Timer timer1;
-		private System.Windows.Forms.TrackBar trackBar1;
-		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.TrackBar trackBarPosition;
+		private System.Windows.Forms.Label labelCurrentTime;
+		private System.Windows.Forms.Label labelTotalTime;
 		private System.Windows.Forms.OpenFileDialog openFileDialog1;
 		private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem removeToolStripMenuItem;
@@ -419,9 +407,9 @@ namespace KIDPlayer
 		private System.Windows.Forms.ListBox listBox1;
 		private System.Windows.Forms.TabPage tabPage1;
 		private System.Windows.Forms.TabControl tabControl1;
-		private System.Windows.Forms.Button button1;
-		private System.Windows.Forms.Button button2;
-		private System.Windows.Forms.Button button3;
+		private System.Windows.Forms.Button buttonPlay;
+		private System.Windows.Forms.Button buttonPause;
+		private System.Windows.Forms.Button buttonStop;
 		private System.Windows.Forms.Panel panel1;
 		private System.Windows.Forms.ToolStripMenuItem lRCToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
@@ -429,8 +417,8 @@ namespace KIDPlayer
 		private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
 		private System.Windows.Forms.MenuStrip menuStrip1;
-		
 
+        private NAudio.Gui.VolumeSlider volumeSlider1;
 		
 		
 	}
