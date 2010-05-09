@@ -12,6 +12,8 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
 using ID3v1Lib;
+using NAudio.CoreAudioApi;
+using NAudio.Wave;
 
 namespace KIDPlayer
 {
@@ -21,10 +23,14 @@ namespace KIDPlayer
 	public partial class MainForm : Form
 	{
 		private string mediaLibPath;
-		private WMPLib.WindowsMediaPlayer media;
-		int currentMediaIntex;
-		Form subForm;
 		
+		Form subForm;
+
+        IWavePlayer waveOut;
+        string fileName = null;
+        WaveStream mainOutputStream;
+        WaveChannel32 volumeStream;
+
 		public MainForm()
 		{
 			//
@@ -35,35 +41,8 @@ namespace KIDPlayer
 			//
 			// TODO: Add constructor code after the InitializeComponent() call.
 			//
-			media=new WMPLib.WindowsMediaPlayer();
-			media.PlayStateChange+=new WMPLib._WMPOCXEvents_PlayStateChangeEventHandler(PlayStateChange);
-			media.uiMode="none";
 		}
 		
-		private void PlayStateChange(int newState)
-		{
-			if (media.playState==WMPLib.WMPPlayState.wmppsMediaEnded)
-            {
-				int temp=listBox1.Items.Count-1;
-				if (currentMediaIntex!=temp)
-				{
-					currentMediaIntex++;
-					listBox1.ClearSelected();
-					//listBox1.SetSelected(currentMediaIntex-1,false);
-					listBox1.SetSelected(currentMediaIntex,true);
-					timer2.Start();
-				}
-				else
-				{	
-					currentMediaIntex=0;
-					listBox1.ClearSelected();
-					//listBox1.SetSelected(temp,false);
-					listBox1.SetSelected(currentMediaIntex,true);
-					timer2.Start();
-				}
-            }
-       
-		}
 		
 		
 		void MainFormLoad(object sender, System.EventArgs e)
@@ -90,6 +69,10 @@ namespace KIDPlayer
 		
 		void MainFormFormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
 		{
+
+            CloseWaveOut();  
+
+
 			StreamWriter sw = File.CreateText("config");
             sw.WriteLine(mediaLibPath);
             foreach (Mp3TagID3V1 m in listBox1.Items)
@@ -98,6 +81,7 @@ namespace KIDPlayer
             }
             sw.Flush();
             sw.Close();
+
 		}
 		
 		void MediaLibraryToolStripMenuItemClick(object sender, EventArgs e)
@@ -116,9 +100,9 @@ namespace KIDPlayer
 			if (lRCToolStripMenuItem.Checked==true)
             {
                 FormLRC formLRC = new FormLRC();
-                if (media.currentMedia!=null)
+                if (fileName!=null)
                 {
-                    Mp3TagID3V1 info = new Mp3TagID3V1(media.currentMedia.sourceURL);
+                    Mp3TagID3V1 info = new Mp3TagID3V1(fileName);
                     ((TextBox)formLRC.Controls.Find("textBoxTitle", false)[0]).Text = info.Title;
                     ((TextBox)formLRC.Controls.Find("textBoxArtist", false)[0]).Text = info.Artist;
                 }
@@ -213,10 +197,7 @@ namespace KIDPlayer
 		
 		void ListBox1DoubleClick(object sender, EventArgs e)
 		{
-			currentMediaIntex = listBox1.SelectedIndex;
-			media.settings.volume=trackBar2.Value;
-			media.URL=((Mp3TagID3V1)listBox1.SelectedItem).GetMp3FilePath();
-			timer1.Start();
+			fileName=((Mp3TagID3V1)listBox1.SelectedItem).GetMp3FilePath();
 		}
 		
 		void AddToolStripMenuItemClick(object sender, EventArgs e)
@@ -242,53 +223,106 @@ namespace KIDPlayer
             }
 		}
 		
-		void Button1Click(object sender, EventArgs e)
+		void buttonPlay_Click(object sender, EventArgs e)
 		{
-			media.controls.play();
-			timer1.Start();
+            if (waveOut != null)
+            {
+                if (waveOut.PlaybackState == PlaybackState.Playing)
+                {
+                    return;
+                }
+                else if (waveOut.PlaybackState == PlaybackState.Paused)
+                {
+                    waveOut.Play();
+                    return;
+                }
+            }
+
+            // we are in a stopped state
+            // TODO: only re-initialise if necessary
+
+            if (String.IsNullOrEmpty(fileName))
+            {
+                //no file load
+                //do something to load file
+                return;
+            }
+            if (String.IsNullOrEmpty(fileName))
+            {
+                return;
+            }
+
+            try
+            {
+                CreateWaveOut();
+            }
+            catch (Exception driverCreateException)
+            {
+                MessageBox.Show(String.Format("{0}", driverCreateException.Message));
+                return;
+            }
+
+            mainOutputStream = CreateInputStream(fileName);
+            trackBarPosition.Maximum = (int)mainOutputStream.TotalTime.TotalSeconds;
+            labelTotalTime.Text = String.Format("{0:00}:{1:00}", (int)mainOutputStream.TotalTime.TotalMinutes,
+                mainOutputStream.TotalTime.Seconds);
+            trackBarPosition.TickFrequency = trackBarPosition.Maximum / 30;
+
+            try
+            {
+                waveOut.Init(mainOutputStream);
+            }
+            catch (Exception initException)
+            {
+                MessageBox.Show(String.Format("{0}", initException.Message), "Error Initializing Output");
+                return;
+            }
+
+            // not doing Volume on IWavePlayer any more
+            volumeStream.Volume = volumeSlider1.Volume;
+            waveOut.Play();
 		}
 		
-		void Button2Click(object sender, EventArgs e)
+		void buttonPause_Click(object sender, EventArgs e)
 		{
-			media.controls.pause();
-			timer1.Stop();
+            if (waveOut != null)
+            {
+                if (waveOut.PlaybackState == PlaybackState.Playing)
+                {
+                    waveOut.Pause();
+                }
+            }
 		}
-		
-		void Button3Click(object sender, EventArgs e)
+
+        void buttonStop_Click(object sender, EventArgs e)
 		{
-			media.controls.stop();
-			label1.Text="00:00";
-			trackBar1.Value=0;
-			timer1.Stop();
+            if (waveOut != null)
+            {
+                waveOut.Stop();
+                trackBarPosition.Value = 0;
+            }
 		}
+
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (waveOut != null)
+            {
+                if (mainOutputStream.Position >= mainOutputStream.Length)
+                {
+                    buttonStop_Click(sender, e);
+                }
+                else
+                {
+                    TimeSpan currentTime = mainOutputStream.CurrentTime;
+                    trackBarPosition.Value = (int)currentTime.TotalSeconds;
+                    labelCurrentTime.Text = String.Format("{0:00}:{1:00}", (int)currentTime.TotalMinutes,
+                        currentTime.Seconds);
+                }
+            }
+        }
+
 		
-		void Timer1Tick(object sender, EventArgs e)
-		{
-//			if (media.controls.currentPositionString==null) 
-//			{
-//				label1.Text="00:00";	
-//			}
-//			else
-//			{
-//				label1.Text=media.controls.currentPositionString;
-//			}
-			
-			label1.Text=media.controls.currentPositionString;
-			label2.Text=media.currentMedia.durationString;
-			trackBar1.Value=(int)(500.0*media.controls.currentPosition/media.currentMedia.duration);
-		}
-		
-		
-		void TrackBar1MouseCaptureChanged(object sender, EventArgs e)
-		{
-			media.controls.currentPosition=trackBar1.Value/500.0*media.currentMedia.duration;
-			timer1.Start();
-		}
-		
-		void TrackBar1MouseDown(object sender, MouseEventArgs e)
-		{
-			timer1.Stop();
-		}
 		
 		void OpenToolStripMenuItemClick(object sender, EventArgs e)
 		{
@@ -304,10 +338,6 @@ namespace KIDPlayer
             }
 		}
 		
-		void TrackBar2ValueChanged(object sender, EventArgs e)
-		{
-			media.settings.volume=trackBar2.Value;
-		}
 		
 		void MainFormResize(object sender, EventArgs e)
 		{
@@ -326,7 +356,133 @@ namespace KIDPlayer
 		void Timer2Tick(object sender, EventArgs e)
 		{
 			timer2.Stop();
-			media.URL=((Mp3TagID3V1)listBox1.SelectedItem).GetMp3FilePath();
+			fileName=((Mp3TagID3V1)listBox1.SelectedItem).GetMp3FilePath();
 		}
+
+
+
+
+        private WaveStream CreateInputStream(string fileName)
+        {
+            WaveChannel32 inputStream;
+            if (fileName.EndsWith(".wav"))
+            {
+                WaveStream readerStream = new WaveFileReader(fileName);
+                if (readerStream.WaveFormat.Encoding != WaveFormatEncoding.Pcm)
+                {
+                    readerStream = WaveFormatConversionStream.CreatePcmStream(readerStream);
+                    readerStream = new BlockAlignReductionStream(readerStream);
+                }
+                if (readerStream.WaveFormat.BitsPerSample != 16)
+                {
+                    var format = new WaveFormat(readerStream.WaveFormat.SampleRate,
+                        16, readerStream.WaveFormat.Channels);
+                    readerStream = new WaveFormatConversionStream(format, readerStream);
+                }
+                inputStream = new WaveChannel32(readerStream);
+            }
+            else if (fileName.EndsWith(".mp3"))
+            {
+                WaveStream mp3Reader = new Mp3FileReader(fileName);
+                WaveStream pcmStream = WaveFormatConversionStream.CreatePcmStream(mp3Reader);
+                WaveStream blockAlignedStream = new BlockAlignReductionStream(pcmStream);
+                inputStream = new WaveChannel32(blockAlignedStream);
+            }
+            else
+            {
+                throw new InvalidOperationException("Unsupported extension");
+            }
+            // we are not going into a mixer so we don't need to zero pad
+            //((WaveChannel32)inputStream).PadWithZeroes = false;
+            volumeStream = inputStream;
+            var meteringStream = new MeteringStream(inputStream, inputStream.WaveFormat.SampleRate / 10);
+            meteringStream.StreamVolume += new EventHandler<StreamVolumeEventArgs>(meteringStream_StreamVolume);
+
+            return meteringStream;
+        }
+
+        void meteringStream_StreamVolume(object sender, StreamVolumeEventArgs e)
+        {
+            
+
+        }
+
+
+        private void CreateWaveOut()
+        {
+            CloseWaveOut();
+            int latency = 300;
+
+            WaveCallbackInfo callbackInfo = WaveCallbackInfo.FunctionCallback();
+            WaveOut outputDevice = new WaveOut(callbackInfo);
+            outputDevice.DesiredLatency = latency;
+            waveOut = outputDevice;
+
+            //if (radioButtonWaveOut.Checked)
+            //{
+            //    WaveCallbackInfo callbackInfo = checkBoxWaveOutWindow.Checked ?
+            //        WaveCallbackInfo.NewWindow() : WaveCallbackInfo.FunctionCallback();
+            //    WaveOut outputDevice = new WaveOut(callbackInfo);
+            //    outputDevice.DesiredLatency = latency;
+            //    waveOut = outputDevice;
+            //}
+            //else if (radioButtonDirectSound.Checked)
+            //{
+            //    waveOut = new DirectSoundOut(latency);
+            //}
+            //else if (radioButtonAsio.Checked)
+            //{
+            //    waveOut = new AsioOut((String)comboBoxAsioDriver.SelectedItem);
+            //    buttonControlPanel.Enabled = true;
+            //}
+            //else
+            //{
+            //    waveOut = new WasapiOut(
+            //        checkBoxWasapiExclusiveMode.Checked ?
+            //            AudioClientShareMode.Exclusive :
+            //            AudioClientShareMode.Shared,
+            //        checkBoxWasapiEventCallback.Checked,
+            //        latency);
+            //}
+        }
+
+        private void CloseWaveOut()
+        {
+            if (waveOut != null)
+            {
+                waveOut.Stop();
+            }
+            if (mainOutputStream != null)
+            {
+                // this one really closes the file and ACM conversion
+                volumeStream.Close();
+                volumeStream = null;
+                // this one does the metering stream
+                mainOutputStream.Close();
+                mainOutputStream = null;
+            }
+            if (waveOut != null)
+            {
+                waveOut.Dispose();
+                waveOut = null;
+            }
+        }
+
+        private void volumeSlider1_VolumeChanged(object sender, EventArgs e)
+        {
+            if (mainOutputStream != null)
+            {
+                volumeStream.Volume = volumeSlider1.Volume;
+            }
+        }
+
+        private void trackBarPosition_Scroll(object sender, EventArgs e)
+        {
+            if (waveOut != null)
+            {
+
+                mainOutputStream.CurrentTime = TimeSpan.FromSeconds(trackBarPosition.Value);
+            }
+        }
 	}
 }
