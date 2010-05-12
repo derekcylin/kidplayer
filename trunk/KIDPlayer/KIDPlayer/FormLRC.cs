@@ -62,9 +62,7 @@ namespace KIDPlayer
 
         private void FormLRC_FormClosing(object sender, FormClosingEventArgs e)
         {
-            MenuStrip ms = (MenuStrip)(this.Owner.Controls.Find("menuStrip1", true)[0]);
-            ToolStripMenuItem tsmi = (ToolStripMenuItem)(ms.Items.Find("lRCToolStripMenuItem", true)[0]);
-            tsmi.Checked = false;
+            
         }
 
 
