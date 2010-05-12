@@ -198,6 +198,9 @@ namespace KIDPlayer
 		void ListBox1DoubleClick(object sender, EventArgs e)
 		{
 			fileName=((Mp3TagID3V1)listBox1.SelectedItem).GetMp3FilePath();
+            buttonStop_Click(this, null);
+            buttonPlay_Click(this, null);
+
 		}
 		
 		void AddToolStripMenuItemClick(object sender, EventArgs e)
@@ -396,24 +399,17 @@ namespace KIDPlayer
             //((WaveChannel32)inputStream).PadWithZeroes = false;
             volumeStream = inputStream;
             var meteringStream = new MeteringStream(inputStream, inputStream.WaveFormat.SampleRate / 10);
-            meteringStream.StreamVolume += new EventHandler<StreamVolumeEventArgs>(meteringStream_StreamVolume);
+     
 
             return meteringStream;
         }
-
-        void meteringStream_StreamVolume(object sender, StreamVolumeEventArgs e)
-        {
-            
-
-        }
-
 
         private void CreateWaveOut()
         {
             CloseWaveOut();
             int latency = 300;
 
-            WaveCallbackInfo callbackInfo = WaveCallbackInfo.FunctionCallback();
+            WaveCallbackInfo callbackInfo = WaveCallbackInfo.NewWindow();
             WaveOut outputDevice = new WaveOut(callbackInfo);
             outputDevice.DesiredLatency = latency;
             waveOut = outputDevice;
