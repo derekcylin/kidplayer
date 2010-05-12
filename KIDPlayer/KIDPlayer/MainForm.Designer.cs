@@ -38,7 +38,19 @@ namespace KIDPlayer
 		{
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            "",
+            "123",
+            "234",
+            "345"}, -1);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.optionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.configToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -71,21 +83,85 @@ namespace KIDPlayer
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.lRCToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.lyricFormToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip2.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarPosition)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem1,
+            this.optionToolStripMenuItem,
+            this.lRCToolStripMenuItem1,
+            this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(624, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(624, 25);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem1
+            // 
+            this.fileToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem1,
+            this.exitToolStripMenuItem1});
+            this.fileToolStripMenuItem1.Name = "fileToolStripMenuItem1";
+            this.fileToolStripMenuItem1.Size = new System.Drawing.Size(39, 21);
+            this.fileToolStripMenuItem1.Text = "&File";
+            // 
+            // openToolStripMenuItem1
+            // 
+            this.openToolStripMenuItem1.Name = "openToolStripMenuItem1";
+            this.openToolStripMenuItem1.Size = new System.Drawing.Size(108, 22);
+            this.openToolStripMenuItem1.Text = "&Open";
+            // 
+            // exitToolStripMenuItem1
+            // 
+            this.exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
+            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(108, 22);
+            this.exitToolStripMenuItem1.Text = "E&xit";
+            // 
+            // optionToolStripMenuItem
+            // 
+            this.optionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.configToolStripMenuItem});
+            this.optionToolStripMenuItem.Name = "optionToolStripMenuItem";
+            this.optionToolStripMenuItem.Size = new System.Drawing.Size(60, 21);
+            this.optionToolStripMenuItem.Text = "&Option";
+            // 
+            // configToolStripMenuItem
+            // 
+            this.configToolStripMenuItem.Name = "configToolStripMenuItem";
+            this.configToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.configToolStripMenuItem.Text = "&Config";
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(47, 21);
+            this.helpToolStripMenuItem.Text = "&Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Text = "&About";
             // 
             // fileToolStripMenuItem
             // 
@@ -195,6 +271,7 @@ namespace KIDPlayer
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(205, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -260,6 +337,7 @@ namespace KIDPlayer
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.listView1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -359,6 +437,76 @@ namespace KIDPlayer
             // 
             this.timer2.Tick += new System.EventHandler(this.Timer2Tick);
             // 
+            // lRCToolStripMenuItem1
+            // 
+            this.lRCToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lyricFormToolStripMenuItem});
+            this.lRCToolStripMenuItem1.Name = "lRCToolStripMenuItem1";
+            this.lRCToolStripMenuItem1.Size = new System.Drawing.Size(42, 21);
+            this.lRCToolStripMenuItem1.Text = "&LRC";
+            // 
+            // lyricFormToolStripMenuItem
+            // 
+            this.lyricFormToolStripMenuItem.Name = "lyricFormToolStripMenuItem";
+            this.lyricFormToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.lyricFormToolStripMenuItem.Text = "Lyric Form";
+            // 
+            // listView1
+            // 
+            this.listView1.AllowColumnReorder = true;
+            this.listView1.AllowDrop = true;
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4});
+            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView1.FullRowSelect = true;
+            this.listView1.GridLines = true;
+            listViewItem1.Tag = "3123";
+            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1});
+            this.listView1.Location = new System.Drawing.Point(3, 3);
+            this.listView1.MultiSelect = false;
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(393, 307);
+            this.listView1.TabIndex = 0;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.DoubleClick += new System.EventHandler(this.listView1_DoubleClick);
+            this.listView1.DragDrop += new System.Windows.Forms.DragEventHandler(this.listView1_DragDrop);
+            this.listView1.DragEnter += new System.Windows.Forms.DragEventHandler(this.listView1_DragEnter);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "";
+            this.columnHeader1.Width = 0;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Track";
+            this.columnHeader2.Width = 42;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Title";
+            this.columnHeader3.Width = 42;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Artist";
+            this.columnHeader4.Width = 305;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(399, 313);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "tabPage3";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -375,11 +523,14 @@ namespace KIDPlayer
             this.Load += new System.EventHandler(this.MainFormLoad);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainFormFormClosing);
             this.Resize += new System.EventHandler(this.MainFormResize);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.contextMenuStrip2.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.trackBarPosition)).EndInit();
             this.ResumeLayout(false);
@@ -420,6 +571,21 @@ namespace KIDPlayer
 		private System.Windows.Forms.MenuStrip menuStrip1;
 
         private NAudio.Gui.VolumeSlider volumeSlider1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem optionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem configToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lRCToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem lyricFormToolStripMenuItem;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.TabPage tabPage3;
 		
 		
 	}

@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
-using ID3v1Lib;
+using ID3;
 using NAudio.CoreAudioApi;
 using NAudio.Wave;
 
@@ -27,7 +27,7 @@ namespace KIDPlayer
 		Form subForm;
 
         IWavePlayer waveOut;
-        string fileName = null;
+        string filePath = null;
         WaveStream mainOutputStream;
         WaveChannel32 volumeStream;
 
@@ -60,7 +60,7 @@ namespace KIDPlayer
                     string temp = sr.ReadLine();
                     if (File.Exists(temp))
                     {
-                        listBox1.Items.Add(new Mp3TagID3V1(temp));
+                        listBox1.Items.Add(new ID3Info(temp,true));
                     }
                 }
                 sr.Close();
@@ -75,9 +75,9 @@ namespace KIDPlayer
 
 			StreamWriter sw = File.CreateText("config");
             sw.WriteLine(mediaLibPath);
-            foreach (Mp3TagID3V1 m in listBox1.Items)
+            foreach (ID3Info m in listBox1.Items)
             {
-                sw.WriteLine(m.GetMp3FilePath());
+                sw.WriteLine(m.FilePath);
             }
             sw.Flush();
             sw.Close();
@@ -100,11 +100,11 @@ namespace KIDPlayer
 			if (lRCToolStripMenuItem.Checked==true)
             {
                 FormLRC formLRC = new FormLRC();
-                if (fileName!=null)
+                if (filePath!=null)
                 {
-                    Mp3TagID3V1 info = new Mp3TagID3V1(fileName);
-                    ((TextBox)formLRC.Controls.Find("textBoxTitle", false)[0]).Text = info.Title;
-                    ((TextBox)formLRC.Controls.Find("textBoxArtist", false)[0]).Text = info.Artist;
+                    ID3Info info = new ID3Info(filePath,true);
+                    ((TextBox)formLRC.Controls.Find("textBoxTitle", false)[0]).Text = info.ID3v2Info.GetTextFrame("TIT2");
+                    ((TextBox)formLRC.Controls.Find("textBoxArtist", false)[0]).Text = info.ID3v2Info.GetTextFrame("TPE1");
                 }
                 formLRC.Owner=this;
                 subForm=formLRC;
@@ -146,7 +146,7 @@ namespace KIDPlayer
             Position.Y = e.Y;
             Position = listBox1.PointToClient(Position);
 
-            listBox1.Items.Add(new Mp3TagID3V1(temp));
+            listBox1.Items.Add(new ID3Info(temp,true));
 		}
 		
 		void AddToPlaylistToolStripMenuItemClick(object sender, EventArgs e)
@@ -161,7 +161,7 @@ namespace KIDPlayer
             
             foreach (TreeNode tn in checkedNodes)
             {
-                listBox1.Items.Add(new Mp3TagID3V1(tn.FullPath));
+                listBox1.Items.Add(new ID3Info(tn.FullPath,true));
             }
 		}
 		
@@ -197,7 +197,7 @@ namespace KIDPlayer
 		
 		void ListBox1DoubleClick(object sender, EventArgs e)
 		{
-			fileName=((Mp3TagID3V1)listBox1.SelectedItem).GetMp3FilePath();
+			filePath=((ID3Info)listBox1.SelectedItem).FilePath;
             buttonStop_Click(this, null);
             buttonPlay_Click(this, null);
 
@@ -212,7 +212,7 @@ namespace KIDPlayer
             {
                 foreach (string element in mediaFiles)
                 {
-                    listBox1.Items.Add(new Mp3TagID3V1(element));
+                    listBox1.Items.Add(new ID3Info(element,true));
                 }
             }
 		}
@@ -244,13 +244,13 @@ namespace KIDPlayer
             // we are in a stopped state
             // TODO: only re-initialise if necessary
 
-            if (String.IsNullOrEmpty(fileName))
+            if (String.IsNullOrEmpty(filePath))
             {
                 //no file load
                 //do something to load file
                 return;
             }
-            if (String.IsNullOrEmpty(fileName))
+            if (String.IsNullOrEmpty(filePath))
             {
                 return;
             }
@@ -265,7 +265,7 @@ namespace KIDPlayer
                 return;
             }
 
-            mainOutputStream = CreateInputStream(fileName);
+            mainOutputStream = CreateInputStream(filePath);
             trackBarPosition.Maximum = (int)mainOutputStream.TotalTime.TotalSeconds;
             labelTotalTime.Text = String.Format("{0:00}:{1:00}", (int)mainOutputStream.TotalTime.TotalMinutes,
                 mainOutputStream.TotalTime.Seconds);
@@ -336,7 +336,7 @@ namespace KIDPlayer
             {
                 foreach (string element in mediaFiles)
                 {
-                    listBox1.Items.Add(new Mp3TagID3V1(element));
+                    listBox1.Items.Add(new ID3Info(element,true));
                 }
             }
 		}
@@ -359,7 +359,7 @@ namespace KIDPlayer
 		void Timer2Tick(object sender, EventArgs e)
 		{
 			timer2.Stop();
-			fileName=((Mp3TagID3V1)listBox1.SelectedItem).GetMp3FilePath();
+			filePath=((ID3Info)listBox1.SelectedItem).FilePath;
 		}
 
 
@@ -479,6 +479,59 @@ namespace KIDPlayer
 
                 mainOutputStream.CurrentTime = TimeSpan.FromSeconds(trackBarPosition.Value);
             }
+        }
+
+        private void listView1_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.Text))
+            {
+                e.Effect = DragDropEffects.Move;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+        }
+
+        private void listView1_DragDrop(object sender, DragEventArgs e)
+        {
+            string tempFilePath = (string)e.Data.GetData(DataFormats.Text);
+            if (!File.Exists(tempFilePath))
+            {
+                return;
+            }
+            Point Position = new Point();
+            Position.X = e.X;
+            Position.Y = e.Y;
+            Position = listBox1.PointToClient(Position);
+
+            ID3Info tempID3Info=new ID3Info(tempFilePath,true);
+            string[] tempStrings={tempID3Info.ID3v2Info.GetTextFrame("TRCK"),
+                                 tempID3Info.ID3v2Info.GetTextFrame("TIT2"),
+                                 tempID3Info.ID3v2Info.GetTextFrame("TPE1")};
+            ListViewItem.ListViewSubItem tempSubItem1 = new ListViewItem.ListViewSubItem();
+            tempSubItem1.Text = tempID3Info.ID3v2Info.GetTextFrame("TRCK");
+            ListViewItem.ListViewSubItem tempSubItem2 = new ListViewItem.ListViewSubItem();
+            tempSubItem2.Text = tempID3Info.ID3v2Info.GetTextFrame("TIT2");
+            ListViewItem.ListViewSubItem tempSubItem3 = new ListViewItem.ListViewSubItem();
+            tempSubItem3.Text = tempID3Info.ID3v2Info.GetTextFrame("TPE1");
+
+
+            ListViewItem tempItem=new ListViewItem();
+            tempItem.Tag = tempID3Info;
+            tempItem.SubItems.Add(tempSubItem1);
+            tempItem.SubItems.Add(tempSubItem2);
+            tempItem.SubItems.Add(tempSubItem3);
+
+            listView1.Items.Add(tempItem);
+            listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+        }
+
+        private void listView1_DoubleClick(object sender, EventArgs e)
+        {
+            filePath = ((ID3Info)listView1.FocusedItem.Tag).FilePath;
+            buttonStop_Click(this, null);
+            buttonPlay_Click(this, null);
         }
 	}
 }
