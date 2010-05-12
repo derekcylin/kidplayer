@@ -24,7 +24,6 @@ namespace KIDPlayer
 	{
 		private string mediaLibPath;
 		
-		Form subForm;
 
         IWavePlayer waveOut;
         string filePath = null;
@@ -60,7 +59,7 @@ namespace KIDPlayer
                     string temp = sr.ReadLine();
                     if (File.Exists(temp))
                     {
-                        listBox1.Items.Add(new ID3Info(temp,true));
+                        //listBox1.Items.Add(new ID3Info(temp,true));
                     }
                 }
                 sr.Close();
@@ -75,10 +74,10 @@ namespace KIDPlayer
 
 			StreamWriter sw = File.CreateText("config");
             sw.WriteLine(mediaLibPath);
-            foreach (ID3Info m in listBox1.Items)
-            {
-                sw.WriteLine(m.FilePath);
-            }
+            //foreach (ID3Info m in listBox1.Items)
+            //{
+            //    sw.WriteLine(m.FilePath);
+            //}
             sw.Flush();
             sw.Close();
 
@@ -95,59 +94,15 @@ namespace KIDPlayer
 		}
 
 		
-		void LRCToolStripMenuItemCheckedChanged(object sender, EventArgs e)
-		{
-			if (lRCToolStripMenuItem.Checked==true)
-            {
-                FormLRC formLRC = new FormLRC();
-                if (filePath!=null)
-                {
-                    ID3Info info = new ID3Info(filePath,true);
-                    ((TextBox)formLRC.Controls.Find("textBoxTitle", false)[0]).Text = info.ID3v2Info.GetTextFrame("TIT2");
-                    ((TextBox)formLRC.Controls.Find("textBoxArtist", false)[0]).Text = info.ID3v2Info.GetTextFrame("TPE1");
-                }
-                formLRC.Owner=this;
-                subForm=formLRC;
-                formLRC.Show();
-            }
-            else
-            {
-                subForm.Close();
-            }
-		}
-		
 		void TreeView1ItemDrag(object sender, ItemDragEventArgs e)
 		{
 			string strItem = ((TreeNode)(e.Item)).FullPath;
             DoDragDrop(strItem, DragDropEffects.Move);
 		}
 		
-		void ListBox1DragEnter(object sender, DragEventArgs e)
-		{
-			if (e.Data.GetDataPresent(DataFormats.Text))
-            {
-                e.Effect = DragDropEffects.Move;
-            }
-            else
-            {
-                e.Effect = DragDropEffects.None;
-            }
-		}
+	
 		
-		void ListBox1DragDrop(object sender, DragEventArgs e)
-		{
-			string temp = (string)e.Data.GetData(DataFormats.Text);
-            if (!File.Exists(temp))
-            {
-                return;
-            }
-            Point Position=new Point();
-            Position.X = e.X;
-            Position.Y = e.Y;
-            Position = listBox1.PointToClient(Position);
-
-            listBox1.Items.Add(new ID3Info(temp,true));
-		}
+	
 		
 		void AddToPlaylistToolStripMenuItemClick(object sender, EventArgs e)
 		{
@@ -161,7 +116,7 @@ namespace KIDPlayer
             
             foreach (TreeNode tn in checkedNodes)
             {
-                listBox1.Items.Add(new ID3Info(tn.FullPath,true));
+                //listBox1.Items.Add(new ID3Info(tn.FullPath,true));
             }
 		}
 		
@@ -186,45 +141,16 @@ namespace KIDPlayer
 		}
 		
 		void ClearToolStripMenuItemClick(object sender, EventArgs e)
-		{
-			listBox1.Items.Clear();
-		}
+        {
+
+        }
 		
 		void ExitToolStripMenuItemClick(object sender, EventArgs e)
 		{
 			Application.Exit();
 		}
 		
-		void ListBox1DoubleClick(object sender, EventArgs e)
-		{
-			filePath=((ID3Info)listBox1.SelectedItem).FilePath;
-            buttonStop_Click(this, null);
-            buttonPlay_Click(this, null);
-
-		}
-		
-		void AddToolStripMenuItemClick(object sender, EventArgs e)
-		{
-			openFileDialog1.ShowDialog();
-            string[] mediaFiles = openFileDialog1.FileNames;
-
-            if (mediaFiles[0] != "openFileDialog1")
-            {
-                foreach (string element in mediaFiles)
-                {
-                    listBox1.Items.Add(new ID3Info(element,true));
-                }
-            }
-		}
-		
-		void RemoveToolStripMenuItemClick(object sender, EventArgs e)
-		{
-			if (this.listBox1.SelectedItems != null)
-            {
-                while (this.listBox1.SelectedItems.Count > 0)
-                    this.listBox1.Items.Remove(this.listBox1.SelectedItems[0]);
-            }
-		}
+	
 		
 		void buttonPlay_Click(object sender, EventArgs e)
 		{
@@ -327,20 +253,6 @@ namespace KIDPlayer
 
 		
 		
-		void OpenToolStripMenuItemClick(object sender, EventArgs e)
-		{
-			openFileDialog1.ShowDialog();
-            string[] mediaFiles = openFileDialog1.FileNames;
-
-            if (mediaFiles[0] != "openFileDialog1")
-            {
-                foreach (string element in mediaFiles)
-                {
-                    listBox1.Items.Add(new ID3Info(element,true));
-                }
-            }
-		}
-		
 		
 		void MainFormResize(object sender, EventArgs e)
 		{
@@ -356,11 +268,6 @@ namespace KIDPlayer
   			this.WindowState = FormWindowState.Normal; 
 		}
 		
-		void Timer2Tick(object sender, EventArgs e)
-		{
-			timer2.Stop();
-			filePath=((ID3Info)listBox1.SelectedItem).FilePath;
-		}
 
 
 
@@ -503,7 +410,7 @@ namespace KIDPlayer
             Point Position = new Point();
             Position.X = e.X;
             Position.Y = e.Y;
-            Position = listBox1.PointToClient(Position);
+            Position = listView1.PointToClient(Position);
 
             ID3Info tempID3Info=new ID3Info(tempFilePath,true);
             string[] tempStrings={tempID3Info.ID3v2Info.GetTextFrame("TRCK"),
@@ -524,7 +431,6 @@ namespace KIDPlayer
             tempItem.SubItems.Add(tempSubItem3);
 
             listView1.Items.Add(tempItem);
-            listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
         }
 
         private void listView1_DoubleClick(object sender, EventArgs e)
@@ -532,6 +438,11 @@ namespace KIDPlayer
             filePath = ((ID3Info)listView1.FocusedItem.Tag).FilePath;
             buttonStop_Click(this, null);
             buttonPlay_Click(this, null);
+        }
+
+        private void exitToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
 	}
 }
