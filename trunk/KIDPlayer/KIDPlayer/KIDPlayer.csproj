@@ -102,4 +102,15 @@
       <Name>TTLRC</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Back.png" />
+    <Content Include="Resources\Forward.png" />
+    <Content Include="Resources\Loop.png" />
+    <Content Include="Resources\Open.png" />
+    <Content Include="Resources\Pause.png" />
+    <Content Include="Resources\Play.png" />
+    <Content Include="Resources\Rewind.png" />
+    <Content Include="Resources\Shuffle.png" />
+    <Content Include="Resources\Stop.png" />
+  </ItemGroup>
 </Project>
